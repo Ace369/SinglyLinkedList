@@ -1,0 +1,178 @@
+import java.util.NoSuchElementException;
+
+/**
+ *	SinglyLinkedList - (description)
+ *
+ *	@author	Aditi Chamarthy
+ *	@since	April 29, 2024
+ */
+public class SinglyLinkedList<E extends Comparable<E>>
+{
+	/* Fields */
+	private ListNode<E> head, tail;		// head and tail pointers to list
+	
+	/* No-args Constructors */
+	public SinglyLinkedList() {
+		head = null;
+		tail = null;
+	}
+	
+	/** Copy constructor */
+	public SinglyLinkedList(SinglyLinkedList<E> oldList) {
+		
+	}
+	
+	/**	Clears the list of elements */
+	//Complete
+	public void clear() {
+		head = null;
+		tail = null;
+	}
+	
+	/**	Add the object to the end of the list
+	 *	@param obj		the object to add
+	 *	@return			true if successful; false otherwise
+	 */
+	 //Complete
+	public boolean add(E obj) {
+		ListNode<E> node = new ListNode<E>(obj);
+		if(head == null){
+			head = tail = node;
+		}
+		else{
+			tail.setNext(node);
+			tail = node;
+		}
+		return true;
+	}
+	
+	/**	Add the object at the specified index
+	 *	@param index		the index to add the object
+	 *	@param obj			the object to add
+	 *	@return				true if successful; false otherwise
+	 *	@throws NoSuchElementException if index does not exist
+	 */
+	 //Edited
+	public boolean add(int index, E obj) {
+		ListNode<E> node = new ListNode<E>(obj);
+		if(head == null){
+			head = tail = node;
+		}
+		else if(index == size()){
+			add(obj);
+		}
+		else if(index >= 0 && index < size()){
+			ListNode<E> cur = head;
+			for(int i = 1; i <= index; i++){
+				if(i == index){
+					ListNode<E> next = cur.getNext();
+					cur.setNext(node);
+					node.setNext(next);
+					return true;
+				}
+				cur = cur.getNext();
+			}
+		}
+		else{
+			throw new NoSuchElementException();
+		}
+		return true;
+	}
+	
+	/**	@return the number of elements in this list */
+	//Complete
+	public int size() {
+		
+		if(head == null){
+			return 0;
+		}
+		int count = 1;
+		ListNode next = head.getNext();
+		while(next != null){
+			count++;
+			next = next.getNext();
+		}
+		return count;
+	}
+	
+	/**	Return the ListNode at the specified index
+	 *	@param index		the index of the ListNode
+	 *	@return				the ListNode at the specified index
+	 *	@throws NoSuchElementException if index does not exist
+	 */
+	public ListNode<E> get(int index) {
+		return head;
+	}
+	
+	/**	Replace the object at the specified index
+	 *	@param index		the index of the object
+	 *	@param obj			the object that will replace the original
+	 *	@return				the object that was replaced
+	 *	@throws NoSuchElementException if index does not exist
+	 */
+	public E set(int index, E obj) {
+		return null;
+	}
+	
+	/**	Remove the element at the specified index
+	 *	@param index		the index of the element
+	 *	@return				the object in the element that was removed
+	 *	@throws NoSuchElementException if index does not exist
+	 */
+	public E remove(int index) {
+		return null;
+	}
+	
+	/**	@return	true if list is empty; false otherwise */
+	//Edited
+	public boolean isEmpty() {
+		if(head == null){
+			return true;
+		}
+		return false;
+	}
+	
+	/**	Tests whether the list contains the given object
+	 *	@param object		the object to test
+	 *	@return				true if the object is in the list; false otherwise
+	 */
+	 //Edited
+	public boolean contains(E object) {
+		if(head == null){
+			return false;
+		}
+		ListNode next = head.getNext();
+		if(head.getValue().equals(object)){
+			return true;
+		}
+		while(next != null){
+			if(next.getValue().equals(object)){
+				return true;
+			}
+			next = next.getNext();
+		}
+		return false;
+		
+	}
+	
+	/**	Return the first index matching the element
+	 *	@param element		the element to match
+	 *	@return				if found, the index of the element; otherwise returns -1
+	 */
+	public int indexOf(E element) {
+		return -1;
+	}
+	
+	/**	Prints the list of elements */
+	public void printList()
+	{
+		ListNode<E> ptr = head;
+		while (ptr != null)
+		{
+			System.out.print(ptr.getValue() + "; ");
+			ptr = ptr.getNext();
+		}
+	}
+	
+
+}
